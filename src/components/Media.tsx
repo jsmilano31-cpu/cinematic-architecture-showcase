@@ -1,26 +1,9 @@
 "use client";
-import { Component, useState, type ReactNode } from "react";
-import dynamic from "next/dynamic";
-import { Box, Play } from "lucide-react";
+import { useState } from "react";
+import { Play } from "lucide-react";
 import type { Media } from "@/content/types";
 import { embedUrl } from "@/lib/media";
 import { Picture } from "./Picture";
-const Viewer = dynamic(() => import("./ModelViewer"), {
-  ssr: false,
-  loading: () => <p role="status">Loading viewer…</p>,
-});
-class ModelBoundary extends Component<
-  { children: ReactNode; fallback: ReactNode },
-  { failed: boolean }
-> {
-  state = { failed: false };
-  static getDerivedStateFromError() {
-    return { failed: true };
-  }
-  render() {
-    return this.state.failed ? this.props.fallback : this.props.children;
-  }
-}
 export function Film({ media }: { media: Media }) {
   const [failed, setFailed] = useState(false);
   const embed = embedUrl(media.url);
@@ -80,39 +63,18 @@ export function Film({ media }: { media: Media }) {
     </div>
   );
 }
-export function MediaCard({
-  media,
-  kind,
-}: {
-  media: Media;
-  kind: "video" | "model";
-}) {
+export function MediaCard({ media }: { media: Media }) {
   const [opened, setOpened] = useState(false);
-  const fallback = (
-    <div className="media-fallback">
-      {media.poster && <Picture image={media.poster} />}
-      <p role="status">The interactive model is unavailable. {media.caption}</p>
-    </div>
-  );
   return (
     <article className="media-card">
       {opened ? (
-        kind === "video" ? (
-          <Film media={media} />
-        ) : (
-          <ModelBoundary fallback={fallback}>
-            <Viewer media={media} fallback={fallback} />
-          </ModelBoundary>
-        )
+        <Film media={media} />
       ) : (
-        <button
-          className={"media-cover " + kind}
-          onClick={() => setOpened(true)}
-        >
+        <button className="media-cover video" onClick={() => setOpened(true)}>
           {media.poster && <Picture image={media.poster} />}
           <span className="media-trigger">
-            {kind === "video" ? <Play size={18} /> : <Box size={18} />}{" "}
-            {kind === "video" ? "Watch film" : "View 3D model"}
+            <Play size={18} />
+            Watch film
           </span>
         </button>
       )}

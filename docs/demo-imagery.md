@@ -18,7 +18,11 @@ The portrait hero uses a locally cropped, 535 ? 941 AVIF derivative of the dusk 
 
 ## Film
 
-`public/demo/film.mp4` is a 15.5-second silent montage of six generated views, encoded as 960 × 540 H.264 at 24 frames per second with progressive download enabled. It illustrates the video player until an approved walkthrough becomes available. When replacing it, update the poster and accessible description. Add a caption track and transcript for a film with speech.
+The rebuilt **15.5-second silent film** moves from the dusk facade through the entry passage, central court, living room, study, and bedroom. Each shot uses a fixed camera center and a 4.5% push-in sampled with subpixel affine transforms. The five dissolves last 12 frames each. The downloadable player uses a 1280 ? 720 H.264 MP4 at 24 fps.
+
+Run `npm run film:export` from the repository root with Python 3, NumPy, opencv-python, and FFmpeg on PATH. The exporter renders both orientations directly from the six source images. It writes the MP4, 372 landscape WebPs, 372 individually framed portrait WebPs at 540 ? 950, and `public/demo/sequence/manifest.json`. Regular site builds use the checked-in assets. Add captions and a transcript when replacing the silent film with speech.
+
+The manifest supplies `fps`, `count`, and the width, height, and filename pattern for each orientation. Frame numbers start at zero and use at least three digits. The pattern is relative to the manifest, for example `portrait/{frame}.webp`. For remotely hosted assets, allowlist the HTTPS host and enable CORS for the manifest and frames. Set the manifest URL in the Project singleton and update the walkthrough MP4 and poster there as well.
 
 ## ImageGen prompts
 

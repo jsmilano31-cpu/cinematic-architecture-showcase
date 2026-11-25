@@ -1,4 +1,5 @@
 import "server-only";
+import { manifestUrl } from "@/lib/film-sequence";
 import { showcaseQuery } from "./query";
 import { createClient, defineQuery } from "next-sanity";
 import { defineLive } from "next-sanity/live";
@@ -44,6 +45,7 @@ function safeMedia(m?: Media) {
   return m && mediaUrl(m.url)
     ? {
         ...m,
+        furnishedUrl: mediaUrl(m.furnishedUrl),
         poster: valid(m.poster) ? m.poster : undefined,
         captionsUrl: mediaUrl(m.captionsUrl),
       }
@@ -89,6 +91,7 @@ export const getShowcase = cache(async (): Promise<Showcase | null> => {
         .map((f) => ({ ...f, hotspots: f.hotspots ?? [] })),
       rooms: (p.rooms ?? []).map((r) => ({ ...r, images: images(r.images) })),
       heroVideo: mediaUrl(p.heroVideo),
+      sequenceManifest: manifestUrl(p.sequenceManifest),
       video: safeMedia(p.video),
       model: safeMedia(p.model),
       materials: (p.materials ?? []).map((m) => ({

@@ -47,6 +47,7 @@ export type Media = {
   captionsUrl?: string;
   transcript?: string;
   azimuth?: number;
+  furnishedUrl?: string;
 };
 export type Section = {
   id: Chapter;
@@ -79,6 +80,7 @@ export type Project = {
   hero: Picture;
   heroMode?: "image" | "video";
   heroVideo?: string;
+  sequenceManifest?: string;
   sections: Section[];
   concept?: string;
   conceptBlocks?: import("@portabletext/react").PortableTextProps["value"];

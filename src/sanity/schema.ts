@@ -1,4 +1,5 @@
 import { defineField as field, defineType as type } from "sanity";
+import { manifestUrl } from "@/lib/film-sequence";
 import { chapters } from "@/content/types";
 import { mediaUrl, contactUrl } from "@/lib/media";
 import { HotspotInput } from "./geometry-input";
@@ -138,6 +139,18 @@ const media = type({
     obj("poster", "architecturalImage"),
     text("caption"),
     url("captionsUrl"),
+    {
+      ...url("furnishedUrl"),
+      title: "Furnished model URL",
+      hidden: ({ path }) => !path.includes("model"),
+    },
+    field({
+      name: "furnishedFile",
+      title: "Furnished model file",
+      type: "file",
+      options: { accept: ".glb,.gltf" },
+      hidden: ({ path }) => !path.includes("model"),
+    }),
     text("transcript"),
     field({
       name: "azimuth",
@@ -198,6 +211,19 @@ const project = type({
     obj("hero", "architecturalImage", true),
     select("heroMode", ["image", "video"]),
     url("heroVideo"),
+    field({
+      name: "sequenceManifest",
+      title: "Scroll film manifest URL",
+      type: "string",
+      description: "Optional frame manifest for the full presentation.",
+      validation: (r) =>
+        r.custom(
+          (v) =>
+            !v ||
+            !!manifestUrl(v) ||
+            "Use a trusted HTTPS manifest or a local /demo/ manifest.",
+        ),
+    }),
     field({
       name: "sections",
       type: "array",

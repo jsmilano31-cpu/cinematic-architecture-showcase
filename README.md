@@ -1,6 +1,6 @@
 # Courtyard House
 
-A local architectural presentation for a single fictional residence. The eight chapters combine a cinematic image hero, a design narrative, exterior views, interactive plans, interiors, a short film, a 3D massing study, materials, and a closing contact link. All sample project facts and architectural assets are demonstration content.
+A local architectural presentation for a single fictional residence. The eight chapters combine a scroll-controlled architectural film, a design narrative, exterior views, interactive plans, interiors, a short film, a 3D massing study, materials, and a closing contact link. All sample project facts and architectural assets are demonstration content.
 
 ## Start locally
 
@@ -38,10 +38,10 @@ Lint covers application, Studio, scripts, tests, configuration, CSS, Markdown, a
 
 ## Editor guide
 
-- **Chapters and text.** In Project, reorder the Sections array or edit a chapter’s title, navigation label, introduction, and visibility. Set the compact navigation choices in Site settings. The hero requires a project title and image or poster. A background film is optional.
+- **Chapters and text.** In Project, reorder the Sections array or edit a chapter’s title, navigation label, introduction, and visibility. Set the compact navigation choices in Site settings. The hero requires a project title and image or poster. The optional Scroll film manifest URL enables a frame sequence across the visible chapters. Use the manifest format and export command in the imagery guide. Without a sequence, the project can use an image or background-video hero.
 - **Plans and rooms.** Add a floor with a unique ID and an uncropped plan. For a URL image, include the drawing’s actual pixel dimensions. Add rooms with stable IDs, the corresponding floor ID, optional area in square metres, a description, and ordered images. In the floor’s hotspots, choose the room by ID and click the placement preview, drag the marker, move it with the arrow keys, or enter percentages. Optional polygon vertices use the same 0–100 coordinate system. After replacing a plan, review every hotspot in Presentation at desktop and phone widths.
 - **Images.** Add a meaningful alternative description to each editorial image. Uploaded images take precedence over demo URLs. Use captions, credit, category, optional room ID, and Sanity’s focal point. Gallery order follows the array order.
-- **Immersive media.** Supply a poster, a short description, and a direct streaming-friendly video or file. Use a WebVTT caption track and transcript for speech. Canonical Vimeo player and YouTube privacy-enhanced embed URLs work when their host is approved. Use a web-optimized GLB or glTF for the model. Aim for a self-contained GLB under 5 MB, with a reduced version for anything larger. The local massing model is approximately 457 KiB. Omit a media object to hide that experience.
+- **Immersive media.** Supply a poster, a short description, and a direct streaming-friendly video or file. Use a WebVTT caption track and transcript for speech. Canonical Vimeo player and YouTube privacy-enhanced embed URLs work when their host is approved. Use a web-optimized GLB or glTF for the model. Aim for a self-contained GLB under 5 MB, with a reduced version for anything larger. The full-screen explorer at `/model` defaults to the optional furnished file. The demo combines a 2.6 MiB textured and furnished model with the original massing study. Name cutaway nodes `roof` and `floor_<floorId>`, and nest selectable `room_<roomId>` nodes under their floors. Matching IDs connect existing CMS rooms and renders. Models without these groups still support orbit and zoom. Rebuild the demo asset with `node scripts/export-house.mjs`. Omit a media object to hide that experience.
 - **Review.** Verify room assignments, units, image rights, location precision, branding, and contact details before publishing real content. The local page uses noindex and disallows crawling. Public release requires separate approval.
 
 ## Replace the demonstration content

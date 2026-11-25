@@ -1,0 +1,14 @@
+{
+  "fps": 24,
+  "count": 372,
+  "landscape": {
+    "width": 1280,
+    "height": 720,
+    "pattern": "landscape/{frame}.webp"
+  },
+  "portrait": {
+    "width": 540,
+    "height": 950,
+    "pattern": "portrait/{frame}.webp"
+  }
+}

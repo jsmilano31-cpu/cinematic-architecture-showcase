@@ -14,8 +14,7 @@ test(
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
       "Courtyard",
     );
-    await page.getByRole("button", { name: "Next exterior view" }).click();
-    await expect(page.locator(".slide-count")).toContainText("02");
+    await expect(page.locator(".scroll-cue")).toBeVisible();
     if (info.project.use.isMobile) {
       const open = page.getByRole("button", { name: "Open chapter menu" });
       await open.click();
@@ -81,7 +80,7 @@ test(
     );
     expect(deferredFiles.length).toBeGreaterThan(0);
     expect(
-      requests.some((u) => u.includes("massing.glb") || u.includes("film.mp4")),
+      requests.some((u) => u.includes(".glb") || u.includes("film.mp4")),
     ).toBeFalsy();
     await page
       .getByRole("button", { name: "Watch film", exact: true })
@@ -95,10 +94,10 @@ test(
       )
       .toBeGreaterThan(0);
     await page.keyboard.press("Escape");
-    await page.getByRole("button", { name: "View 3D model" }).click();
-    await expect(page.locator("canvas")).toBeVisible();
+    await page.getByRole("link", { name: "View 3D model" }).click();
+    await expect(page.locator(".model-stage canvas")).toBeVisible();
     await expect
-      .poll(() => requests.some((u) => u.endsWith("massing.glb")))
+      .poll(() => requests.some((u) => u.endsWith("furnished.glb")))
       .toBeTruthy();
     expect(
       deferredFiles.every((file) => requests.some((url) => url.endsWith(file))),
@@ -113,14 +112,14 @@ test(
   { tag: "@desktop" },
   async ({ page, request }) => {
     await page.route("**/film.mp4", (r) => r.abort());
-    await page.route("**/massing.glb", (r) => r.abort());
+    await page.route("**/furnished.glb", (r) => r.abort());
     await page.goto("/");
     await page
       .locator("#experience")
       .getByRole("button", { name: "Watch film" })
       .click();
     await expect(page.getByText(/The film is unavailable/)).toBeVisible();
-    await page.getByRole("button", { name: "View 3D model" }).click();
+    await page.getByRole("link", { name: "View 3D model" }).click();
     await expect(
       page.getByText(/The interactive model is unavailable/),
     ).toBeVisible();

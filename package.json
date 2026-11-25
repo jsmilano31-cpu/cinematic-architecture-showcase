@@ -12,6 +12,7 @@
     "lint": "eslint . --max-warnings=0 && stylelint \"src/**/*.css\" && markdownlint-cli2 && prettier --check \"**/*.{json,jsonc}\"",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "playwright test",
+    "film:export": "python scripts/export-film.py",
     "demo:dataset": "tsx scripts/export-demo.mjs",
     "test:content": "npm run demo:dataset && tsx --test tests/content.test.tsx"
   },

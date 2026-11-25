@@ -110,6 +110,7 @@ export const demoProject: Project = {
   year: "2026",
   hero,
   heroMode: "image",
+  sequenceManifest: "/demo/sequence/manifest.json",
   sections: [
     { id: "hero", label: "Overview", visible: true },
     {
@@ -202,15 +203,11 @@ export const demoProject: Project = {
   },
   model: {
     url: "/demo/massing.glb",
-    title: "Massing study",
-    poster: {
-      url: "/demo/massing.svg",
-      alt: "Axonometric drawing of the two-storey courtyard house",
-      width: 1200,
-      height: 680,
-    },
-    caption:
-      "Orbit the simplified building to see the arrangement of wings around the open court.",
+    furnishedUrl: "/demo/furnished.glb",
+    title: "House in 3D",
+    poster: hero,
+    azimuth: 18,
+    caption: "Orbit the furnished house, lift away a floor or switch to the massing study.",
   },
   materials: [
     {

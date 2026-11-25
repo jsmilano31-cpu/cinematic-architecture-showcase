@@ -15,6 +15,7 @@ export function Hero({
   status,
   demo,
   slides,
+  sequence,
   video,
   heroVideo,
   next,
@@ -27,6 +28,7 @@ export function Hero({
   status?: string;
   demo?: boolean;
   slides: ImageData[];
+  sequence?: boolean;
   video?: Media;
   heroVideo?: string;
   next?: string;
@@ -113,14 +115,20 @@ export function Hero({
               .filter(Boolean)
               .join("  /  ")}
           </span>
-          <div className="hero-index" aria-live="polite">
-            <span className="slide-count">
-              {pad(index + 1)} <b>/</b> <small>{pad(slides.length)}</small>
+          {sequence ? (
+            <span className="scroll-cue">
+              Scroll to explore <ArrowDown size={16} />
             </span>
-            <span className="slide-line" />
-            <span className="slide-caption">{image.caption}</span>
-          </div>
-          {slides.length > 1 && (
+          ) : (
+            <div className="hero-index" aria-live="polite">
+              <span className="slide-count">
+                {pad(index + 1)} <b>/</b> <small>{pad(slides.length)}</small>
+              </span>
+              <span className="slide-line" />
+              <span className="slide-caption">{image.caption}</span>
+            </div>
+          )}
+          {!sequence && slides.length > 1 && (
             <div className="hero-pager">
               <button
                 className="circle"

@@ -7,11 +7,11 @@ const image = `{
  'focalX':upload.hotspot.x*100,'focalY':upload.hotspot.y*100,
  alt,caption,credit,category,roomId
 }`;
-const media = `{title,'url':coalesce(file.asset->url,url),poster${image},caption,captionsUrl,transcript,azimuth}`;
+const media = `{title,'url':coalesce(file.asset->url,url),poster${image},caption,captionsUrl,transcript,azimuth,'furnishedUrl':coalesce(furnishedFile.asset->url,furnishedUrl)}`;
 export const showcaseQuery = `{
  'settings':*[_type=='siteSettings' && _id=='siteSettings'][0]{wordmark,logo${image},contactName,email,footer,navigation,socials[]{label,url},seoTitle,seoDescription},
  'project':*[_type=='project' && _id=='project'][0]{
-   demo,title,slug,subtitle,typology,location,year,status,area,hero${image},heroMode,heroVideo,
+   demo,title,slug,subtitle,typology,location,year,status,area,hero${image},heroMode,heroVideo,sequenceManifest,
    sections[]{id,label,title,intro,visible},'conceptBlocks':concept,'concept':pt::text(concept),
    conceptImages[]${image},exterior[]${image},interiors[]${image},
    floors[]{floorId,title,description,image${image},hotspots[]{roomId,x,y,polygon[]{x,y}}},

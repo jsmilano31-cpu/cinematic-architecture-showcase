@@ -23,6 +23,10 @@ test("demo seed resolves through the same GROQ as Studio content", async () => {
   assert.equal(result.project.concept, demoProject.concept);
   assert.ok(result.project.video.url);
   assert.ok(result.project.model.url);
+  assert.equal(
+    result.project.model.furnishedUrl,
+    demoProject.model?.furnishedUrl,
+  );
   const draft = structuredClone(dataset[1]);
   draft._id = "drafts.project";
   draft.title = "Unpublished";
