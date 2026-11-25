@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "block-no-empty": true,
+    "color-no-invalid-hex": true,
+    "declaration-block-no-duplicate-properties": true,
+    "no-duplicate-at-import-rules": true,
+    "property-no-unknown": true,
+    "selector-type-no-unknown": true,
+    "function-calc-no-unspaced-operator": true
+  }
+}

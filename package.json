@@ -1,0 +1,60 @@
+{
+  "name": "courtyard-house",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build --webpack",
+    "start": "next start --hostname 127.0.0.1",
+    "lint": "eslint . --max-warnings=0 && stylelint \"src/**/*.css\" && markdownlint-cli2 && prettier --check \"**/*.{json,jsonc}\"",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "playwright test",
+    "demo:dataset": "tsx scripts/export-demo.mjs",
+    "test:content": "npm run demo:dataset && tsx --test tests/content.test.tsx"
+  },
+  "dependencies": {
+    "@fontsource-variable/cormorant-garamond": "^5.2.0",
+    "@fontsource-variable/dm-sans": "^5.2.0",
+    "@gsap/react": "^2.1.2",
+    "@portabletext/react": "^7.0.1",
+    "@react-three/drei": "^10.0.0",
+    "@react-three/fiber": "^9.0.0",
+    "@sanity/client": "^8.17.0",
+    "gsap": "^3.13.0",
+    "lucide-react": "^0.577.0",
+    "next": "^16.2.0",
+    "next-sanity": "^13.5.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sanity": "6.24.0",
+    "styled-components": "^6.1.0",
+    "three": "^0.183.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.1",
+    "@playwright/test": "^1.58.0",
+    "@tailwindcss/postcss": "^4.1.0",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.183.0",
+    "eslint": "^9",
+    "eslint-config-next": "^16.2.0",
+    "groq-js": "^2.0.3",
+    "markdownlint-cli2": "^0.24.2",
+    "prettier": "^3.10.1",
+    "stylelint": "^18.1.0",
+    "tailwindcss": "^4.1.0",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3"
+  },
+  "overrides": {
+    "@vercel/frameworks": {
+      "js-yaml": "3.15.2",
+      "smol-toml": "1.9.1"
+    }
+  }
+}
